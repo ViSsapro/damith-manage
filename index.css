@@ -1,0 +1,1844 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 0, 0, 0.08), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(56, 239, 125, 0.06), transparent 30%),
+        #090909;
+
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   ANIMATED GLOW FRAME
+========================================================= */
+
+@keyframes borderGlow {
+    0% {
+        border-color: #ff0000;
+        box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
+    }
+
+    33% {
+        border-color: #38ef7d;
+        box-shadow: 0 0 12px rgba(56, 239, 125, 0.20);
+    }
+
+    66% {
+        border-color: #f3ba2f;
+        box-shadow: 0 0 12px rgba(243, 186, 47, 0.20);
+    }
+
+    100% {
+        border-color: #ff0000;
+        box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
+    }
+}
+
+.animated-box-frame {
+    border: 1px solid #333;
+    animation: borderGlow 6s infinite linear;
+}
+
+
+/* =========================================================
+   LOGIN SCREEN
+========================================================= */
+
+.login-wrapper {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* =========================================================
+   MAIN LOGIN CARD
+========================================================= */
+
+.login-main-card {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 650px;
+
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+
+    background: rgba(20, 20, 20, 0.96);
+
+    border: 1px solid #333;
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.75),
+        0 0 50px rgba(255, 0, 0, 0.06);
+
+    position: relative;
+}
+
+
+/* =========================================================
+   LEFT BRANDING SECTION
+========================================================= */
+
+.login-brand-section {
+    position: relative;
+
+    min-height: 650px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 45px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 0, 0, 0.14),
+            rgba(0, 0, 0, 0.2) 45%,
+            rgba(56, 239, 125, 0.06)
+        );
+}
+
+
+/* Background decorative circles */
+
+.login-brand-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 0, 0, 0.15);
+
+    top: -150px;
+    left: -150px;
+}
+
+.login-brand-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(56, 239, 125, 0.12);
+
+    bottom: -120px;
+    right: -100px;
+}
+
+
+/* =========================================================
+   TEACHER PHOTO
+========================================================= */
+
+.brand-photo-wrapper {
+    position: relative;
+    z-index: 2;
+
+    width: 240px;
+    height: 240px;
+
+    border-radius: 50%;
+
+    padding: 7px;
+
+    background: linear-gradient(
+        135deg,
+        #ff0000,
+        #f3ba2f,
+        #38ef7d,
+        #ff0000
+    );
+
+    box-shadow:
+        0 0 35px rgba(255, 0, 0, 0.25),
+        0 0 70px rgba(255, 0, 0, 0.08);
+
+    animation: photoGlow 5s infinite linear;
+}
+
+@keyframes photoGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px rgba(56, 239, 125, 0.25));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.3));
+    }
+}
+
+.brand-teacher-photo {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    display: block;
+
+    background: #111;
+
+    border: 5px solid #101010;
+}
+
+
+/* =========================================================
+   BRAND TEXT
+========================================================= */
+
+.brand-text {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 28px;
+}
+
+
+.small-brand-title {
+    color: #aaa;
+
+    font-size: 0.75rem;
+
+    letter-spacing: 4px;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+
+.brand-text h1 {
+    font-size: clamp(2.1rem, 4vw, 3.5rem);
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+.brand-text h1 span {
+    color: #ff0000;
+
+    display: inline-block;
+}
+
+
+.brand-text h2 {
+    margin-top: 14px;
+
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #ffffff;
+}
+
+
+.brand-divider {
+    width: 80px;
+    height: 3px;
+
+    margin: 18px auto;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #ff0000,
+        #f3ba2f,
+        #38ef7d
+    );
+}
+
+
+.brand-text p {
+    color: #ddd;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+}
+
+
+.brand-text .institute-name {
+    color: #ff5252;
+
+    margin-top: 7px;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   CLASS BADGE
+========================================================= */
+
+.class-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid #333;
+
+    color: #aaa;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+.class-badge i {
+    color: #38ef7d;
+}
+
+
+/* =========================================================
+   RIGHT LOGIN SECTION
+========================================================= */
+
+.login-form-section {
+    min-height: 650px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 55px 55px;
+
+    background: #111;
+
+    border-left: 1px solid #292929;
+}
+
+
+/* =========================================================
+   LOGIN HEADER
+========================================================= */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+
+.login-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 0, 0, 0.10);
+
+    border: 1px solid rgba(255, 0, 0, 0.35);
+
+    color: #ff0000;
+
+    font-size: 1.4rem;
+}
+
+
+.login-header h2 {
+    font-size: 1.8rem;
+
+    margin-bottom: 7px;
+}
+
+
+.login-header p {
+    color: #888;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   NORMAL LOGIN FORM
+========================================================= */
+
+.normal-login-form {
+    width: 100%;
+}
+
+
+.normal-login-form label {
+    display: block;
+
+    color: #bbb;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    margin-top: 14px;
+}
+
+
+.normal-login-form label i {
+    color: #ff0000;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   INPUT WRAPPER
+========================================================= */
+
+.input-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.input-wrapper > i {
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #777;
+
+    font-size: 0.9rem;
+}
+
+
+.input-wrapper input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 45px 0 43px;
+
+    border-radius: 10px;
+
+    border: 1px solid #333;
+
+    background: #181818;
+
+    color: #fff;
+
+    outline: none;
+
+    font-size: 0.9rem;
+
+    transition: 0.25s;
+}
+
+
+.input-wrapper input::placeholder {
+    color: #666;
+}
+
+
+.input-wrapper input:focus {
+    border-color: #ff0000;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.password-toggle {
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: none;
+
+    color: #777;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+}
+
+.password-toggle:hover {
+    color: #fff;
+
+    background: #292929;
+}
+
+
+/* =========================================================
+   MAIN LOGIN BUTTON
+========================================================= */
+
+.main-login-btn {
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #ff0000,
+        #d90000
+    );
+
+    color: #fff;
+
+    font-size: 0.95rem;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 7px 20px rgba(255, 0, 0, 0.18);
+
+    transition: 0.25s;
+}
+
+
+.main-login-btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 10px 25px rgba(255, 0, 0, 0.25);
+}
+
+
+.main-login-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   LOGIN DIVIDER
+========================================================= */
+
+.login-divider {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 25px 0 18px;
+
+    color: #555;
+
+    font-size: 0.68rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.login-divider::before,
+.login-divider::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: #2b2b2b;
+}
+
+
+.login-divider span {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SOCIAL LOGIN BUTTONS
+========================================================= */
+
+.social-login-btn {
+    width: 100%;
+
+    height: 46px;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #333;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    transition: 0.25s;
+}
+
+
+.social-login-btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+}
+
+
+.google-login {
+    background: #ffffff;
+
+    color: #222;
+
+    border-color: #fff;
+}
+
+
+.google-login i {
+    color: #ea4335;
+
+    font-size: 1rem;
+}
+
+
+.facebook-login {
+    background: #1877f2;
+
+    color: #fff;
+
+    border-color: #1877f2;
+}
+
+
+.facebook-login i {
+    font-size: 1rem;
+}
+
+
+.email-login {
+    background: #1d1d1d;
+
+    color: #fff;
+
+    border-color: #444;
+}
+
+
+.email-login i {
+    color: #ff0000;
+}
+
+
+/* =========================================================
+   LOGIN FOOTER
+========================================================= */
+
+.login-footer {
+    text-align: center;
+
+    margin-top: 18px;
+
+    color: #555;
+
+    font-size: 0.7rem;
+
+    line-height: 1.8;
+}
+
+
+.login-footer p:first-child {
+    color: #777;
+}
+
+
+.login-footer i {
+    color: #38ef7d;
+
+    margin-right: 4px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 3000;
+
+    padding: 20px;
+
+    backdrop-filter: blur(5px);
+}
+
+
+.modal-content {
+    background: #181818;
+
+    padding: 28px;
+
+    border-radius: 16px;
+
+    width: 100%;
+
+    max-width: 420px;
+
+    border: 1px solid #333;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+
+.modal-icon {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 15px;
+
+    background: rgba(255, 0, 0, 0.1);
+
+    color: #ff0000;
+
+    font-size: 1.4rem;
+}
+
+
+.modal-content h3 {
+    text-align: center;
+
+    margin-bottom: 10px;
+
+    color: #fff;
+}
+
+
+.modal-content p {
+    text-align: center;
+
+    font-size: 0.85rem;
+
+    color: #aaa;
+
+    margin-bottom: 18px;
+
+    line-height: 1.5;
+}
+
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    border: 1px solid #444;
+
+    background: #0e0e0e;
+
+    color: #fff;
+
+    font-size: 0.95rem;
+
+    outline: none;
+}
+
+
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+    border-color: #ff0000;
+}
+
+
+.modal-buttons {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+
+.btn-submit {
+    background: #ff0000;
+
+    color: #fff;
+
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.btn-submit:hover {
+    filter: brightness(1.1);
+
+    transform: translateY(-1px);
+}
+
+
+.btn-cancel {
+    background: #333;
+
+    color: #fff;
+
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.btn-cancel:hover {
+    background: #444;
+}
+
+
+/* =========================================================
+   MAIN APP
+========================================================= */
+
+.app-wrapper {
+    display: none;
+
+    width: 100%;
+
+    max-width: 800px;
+
+    padding: 20px;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   TOP NAVBAR
+========================================================= */
+
+.top-navbar {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #181818;
+
+    padding: 12px 20px;
+
+    border-radius: 30px;
+
+    margin-bottom: 25px;
+
+    border: 1px solid #333;
+}
+
+
+.user-badge {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 0.9rem;
+
+    min-width: 0;
+}
+
+
+.user-badge span {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.user-badge i {
+    color: #ff0000;
+}
+
+
+.badge-role {
+    background: #333;
+
+    color: #aaa;
+
+    padding: 3px 8px;
+
+    border-radius: 10px;
+
+    font-size: 0.75rem;
+
+    margin-left: 5px;
+
+    flex-shrink: 0;
+}
+
+
+.badge-role.admin {
+    background: #ff0000;
+
+    color: #fff;
+}
+
+
+.nav-right-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.menu-hamburger-btn {
+    background: none;
+
+    border: none;
+
+    color: #fff;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+
+    transition: color 0.2s;
+}
+
+
+.menu-hamburger-btn:hover {
+    color: #ff0000;
+}
+
+
+/* =========================================================
+   SIDE MENU
+========================================================= */
+
+.side-menu-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    z-index: 2500;
+
+    display: none;
+}
+
+
+.side-menu-drawer {
+    position: fixed;
+
+    top: 0;
+
+    right: -300px;
+
+    width: 280px;
+
+    height: 100vh;
+
+    background: #141414;
+
+    border-left: 1px solid #2a2a2a;
+
+    z-index: 2600;
+
+    transition: right 0.3s ease;
+
+    padding: 25px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.side-menu-drawer.open {
+    right: 0;
+}
+
+
+.drawer-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #252525;
+
+    margin-bottom: 20px;
+}
+
+
+.drawer-header h3 {
+    font-size: 1.2rem;
+
+    color: #fff;
+}
+
+
+.close-drawer-btn {
+    background: none;
+
+    border: none;
+
+    color: #888;
+
+    font-size: 1.4rem;
+
+    cursor: pointer;
+}
+
+
+.close-drawer-btn:hover {
+    color: #fff;
+}
+
+
+.drawer-nav-list {
+    list-style: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.drawer-nav-item button {
+    width: 100%;
+
+    background: none;
+
+    border: none;
+
+    color: #ccc;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    text-align: left;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    transition: all 0.2s ease;
+}
+
+
+.drawer-nav-item button i {
+    width: 20px;
+
+    color: #ff0000;
+}
+
+
+.drawer-nav-item button:hover,
+.drawer-nav-item button.active {
+    background: #222;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   PAGE VIEWS
+========================================================= */
+
+.page-view {
+    display: none;
+
+    width: 100%;
+}
+
+
+.page-view.active-view {
+    display: block;
+}
+
+
+/* =========================================================
+   HOME HEADER
+========================================================= */
+
+header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    border: 3px solid #ff0000;
+
+    object-fit: cover;
+
+    margin-bottom: 12px;
+}
+
+
+header h1 {
+    font-size: 1.7rem;
+
+    line-height: 1.3;
+
+    margin-bottom: 8px;
+}
+
+
+header h1 span {
+    color: #ff0000;
+}
+
+
+/* =========================================================
+   MAIN TABS
+========================================================= */
+
+.main-tabs-container {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 2px solid #222;
+
+    padding-bottom: 15px;
+}
+
+
+.main-tab-btn {
+    background: #1e1e1e;
+
+    color: #aaa;
+
+    padding: 12px 24px;
+
+    border-radius: 25px;
+
+    border: 1px solid #333;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 1rem;
+
+    transition: all 0.3s ease;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.main-tab-btn.active,
+.main-tab-btn:hover {
+    background: #ff0000;
+
+    color: #fff;
+
+    border-color: #ff0000;
+}
+
+
+/* =========================================================
+   PLAYLIST SUB TABS
+========================================================= */
+
+.sub-tabs-container {
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+
+    padding-bottom: 8px;
+
+    display: none;
+}
+
+
+.sub-tab-btn {
+    display: inline-block;
+
+    background: #222;
+
+    color: #ccc;
+
+    padding: 8px 16px;
+
+    margin-right: 8px;
+
+    border-radius: 18px;
+
+    border: 1px solid #333;
+
+    cursor: pointer;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+.sub-tab-btn.active {
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* =========================================================
+   PLAYLIST GRID
+========================================================= */
+
+.playlist-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(240px, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+
+.playlist-card {
+    background: #1a1a1a;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    border: 1px solid #292929;
+
+    transition: 0.25s;
+}
+
+
+.playlist-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #ff0000;
+
+    background: #202020;
+}
+
+
+.playlist-card i {
+    font-size: 40px;
+
+    color: #ff0000;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-container {
+    background: #1f1f1f;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5);
+
+    margin-bottom: 30px;
+}
+
+
+.video-wrapper {
+    position: relative;
+
+    padding-bottom: 56.25%;
+
+    height: 0;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+.video-wrapper iframe {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+
+.video-details {
+    padding: 20px;
+}
+
+
+.video-title {
+    font-size: 1.3rem;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+.video-description {
+    color: #ccc;
+
+    font-size: 0.95rem;
+
+    line-height: 1.6;
+
+    background: #2a2a2a;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border-left: 4px solid #ff0000;
+
+    margin-bottom: 15px;
+
+    white-space: pre-wrap;
+
+    max-height: 140px;
+
+    overflow-y: auto;
+}
+
+
+.yt-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #ff0000;
+
+    color: #fff;
+
+    padding: 8px 18px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border-radius: 20px;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.earn-container {
+    background: #181818;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    width: 100%;
+
+    border: 1px solid #292929;
+}
+
+
+/* =========================================================
+   ADMIN FLOATING BUTTON
+========================================================= */
+
+.fab-container {
+    position: fixed;
+
+    bottom: 30px;
+
+    right: 30px;
+
+    display: none;
+
+    flex-direction: column-reverse;
+
+    align-items: flex-end;
+
+    gap: 12px;
+
+    z-index: 2000;
+}
+
+
+.fab-main {
+    width: 60px;
+    height: 60px;
+
+    background: #ff0000;
+
+    color: #fff;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 4px 15px rgba(255, 0, 0, 0.5);
+
+    cursor: pointer;
+
+    border: none;
+
+    transition: transform 0.3s ease;
+}
+
+
+.fab-container.active .fab-main {
+    transform: rotate(45deg);
+
+    background: #444;
+}
+
+
+.fab-options {
+    display: none;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    align-items: flex-end;
+}
+
+
+.fab-container.active .fab-options {
+    display: flex;
+}
+
+
+.fab-option-btn {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #222;
+
+    color: #fff;
+
+    padding: 10px 16px;
+
+    border-radius: 25px;
+
+    border: 1px solid #444;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.fab-option-btn i {
+    color: #ff0000;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .login-main-card {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+        min-height: auto;
+    }
+
+    .login-brand-section {
+        min-height: auto;
+
+        padding: 45px 30px 35px;
+    }
+
+    .login-form-section {
+        min-height: auto;
+
+        padding: 40px 35px 45px;
+
+        border-left: none;
+
+        border-top: 1px solid #292929;
+    }
+
+    .brand-photo-wrapper {
+        width: 190px;
+        height: 190px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .login-wrapper {
+        padding: 12px;
+    }
+
+    .login-main-card {
+        border-radius: 20px;
+    }
+
+    .login-brand-section {
+        padding: 35px 18px 30px;
+    }
+
+    .login-form-section {
+        padding: 30px 20px 35px;
+    }
+
+    .brand-photo-wrapper {
+        width: 155px;
+        height: 155px;
+    }
+
+    .brand-text {
+        margin-top: 20px;
+    }
+
+    .brand-text h1 {
+        font-size: 2rem;
+    }
+
+    .brand-text h2 {
+        font-size: 1.05rem;
+
+        letter-spacing: 1px;
+    }
+
+    .small-brand-title {
+        font-size: 0.65rem;
+
+        letter-spacing: 2.5px;
+    }
+
+    .brand-text p {
+        font-size: 0.85rem;
+    }
+
+    .brand-text .institute-name {
+        font-size: 0.75rem;
+    }
+
+    .class-badge {
+        font-size: 0.65rem;
+
+        padding: 8px 12px;
+    }
+
+    .login-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .main-tabs-container {
+        gap: 8px;
+    }
+
+    .main-tab-btn {
+        padding: 10px 14px;
+
+        font-size: 0.85rem;
+    }
+
+    .app-wrapper {
+        padding: 12px;
+    }
+
+    .top-navbar {
+        padding: 10px 14px;
+    }
+
+    .user-badge {
+        font-size: 0.75rem;
+
+        gap: 6px;
+    }
+
+    .badge-role {
+        display: none;
+    }
+
+    .playlist-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fab-container {
+        right: 18px;
+
+        bottom: 18px;
+    }
+
+    .modal-content {
+        padding: 22px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .brand-photo-wrapper {
+        width: 135px;
+        height: 135px;
+    }
+
+    .brand-text h1 {
+        font-size: 1.65rem;
+    }
+
+    .brand-text h2 {
+        font-size: 0.9rem;
+    }
+
+    .login-form-section {
+        padding: 25px 15px 30px;
+    }
+
+    .main-tab-btn {
+        padding: 9px 10px;
+
+        font-size: 0.75rem;
+    }
+}

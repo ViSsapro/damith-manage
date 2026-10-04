@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OL Commerce With Damith - Manage</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- EmailJS - OTP Login සඳහා පමණයි -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- LOGIN SCREEN -->
+<!-- ========================================================= -->
+
+<div class="login-wrapper" id="loginScreen">
+
+    <div class="login-main-card">
+
+        <!-- ================================================= -->
+        <!-- LEFT SIDE - TEACHER / INSTITUTE -->
+        <!-- ================================================= -->
+
+        <div class="login-brand-section">
+
+            <div class="brand-photo-wrapper">
+                <img
+                    src="https://i.ibb.co/v4d3Rp0t/Layer-0-copy-2.png"
+                    alt="Damith Sir"
+                    class="brand-teacher-photo"
+                >
+            </div>
+
+            <div class="brand-text">
+
+                <div class="small-brand-title">
+                    WINS INSTITUTE
+                </div>
+
+                <h1>
+                    DAMITH
+                    <span>MANAGE</span>
+                </h1>
+
+                <h2>
+                    OL COMMERCE KING
+                </h2>
+
+                <div class="brand-divider"></div>
+
+                <p>
+                    OL COMMERCE
+                </p>
+
+                <p class="institute-name">
+                    WINS INSTITUTE – VEYANGODA
+                </p>
+
+                <div class="class-badge">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    ONLINE CLASS MANAGEMENT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT SIDE - LOGIN -->
+        <!-- ================================================= -->
+
+        <div class="login-form-section">
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+
+                <h2>
+                    Student Login
+                </h2>
+
+                <p>
+                    Welcome to OL Commerce With Damith
+                </p>
+
+            </div>
+
+
+            <!-- EMAIL + PASSWORD LOGIN -->
+
+            <div class="normal-login-form">
+
+                <label for="loginEmail">
+                    <i class="fa-solid fa-envelope"></i>
+                    Email Address
+                </label>
+
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                    >
+                </div>
+
+
+                <label for="loginPassword">
+                    <i class="fa-solid fa-lock"></i>
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword()"
+                    >
+                        <i class="fa-solid fa-eye" id="passwordEye"></i>
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="main-login-btn"
+                    id="emailPasswordLoginBtn"
+                    onclick="loginWithEmailPassword()"
+                >
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Sign In
+                </button>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="login-divider">
+                <span>OR CONTINUE WITH</span>
+            </div>
+
+
+            <!-- GOOGLE LOGIN -->
+
+            <button
+                class="social-login-btn google-login"
+                id="googleLoginBtn"
+            >
+                <i class="fa-brands fa-google"></i>
+                <span>Sign in with Google</span>
+            </button>
+
+
+            <!-- FACEBOOK LOGIN -->
+
+            <button
+                class="social-login-btn facebook-login"
+                id="facebookLoginBtn"
+            >
+                <i class="fa-brands fa-facebook-f"></i>
+                <span>Sign in with Facebook</span>
+            </button>
+
+
+            <!-- EMAIL OTP -->
+
+            <button
+                class="social-login-btn email-login"
+                onclick="openEmailModal()"
+            >
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Sign in with Email Verification</span>
+            </button>
+
+
+            <!-- FOOTER -->
+
+            <div class="login-footer">
+
+                <p>
+                    <i class="fa-solid fa-shield-check"></i>
+                    Secure Student Access
+                </p>
+
+                <p>
+                    © OL Commerce With Damith
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- EMAIL OTP MODAL -->
+<!-- ========================================================= -->
+
+<div class="modal" id="emailAuthModal">
+
+    <div class="modal-content animated-box-frame">
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+        </div>
+
+        <h3 id="emailModalTitle">
+            Email Verification
+        </h3>
+
+        <p id="emailModalDesc">
+            ඔබගේ Email එක ඇතුළත් කර Verification Code (OTP)
+            එක ලබාගන්න.
+        </p>
+
+
+        <!-- STEP 1 -->
+
+        <div id="otpStep1">
+
+            <input
+                type="email"
+                id="userEmailInput"
+                placeholder="example@gmail.com"
+                autocomplete="email"
+            >
+
+            <div class="modal-buttons">
+
+                <button
+                    class="btn-cancel"
+                    onclick="closeAuthModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="btn-submit"
+                    onclick="sendOTPCode()"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Get Verification Code
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div
+            id="otpStep2"
+            style="display:none;"
+        >
+
+            <input
+                type="text"
+                id="otpInput"
+                placeholder="Enter 6-digit Code"
+                maxlength="6"
+                inputmode="numeric"
+            >
+
+            <div class="modal-buttons">
+
+                <button
+                    class="btn-cancel"
+                    onclick="closeAuthModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="btn-submit"
+                    onclick="verifyOTPCode()"
+                >
+                    <i class="fa-solid fa-circle-check"></i>
+                    Verify & Sign In
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- MAIN APPLICATION -->
+<!-- ========================================================= -->
+
+<div class="app-wrapper" id="appScreen">
+
+
+    <!-- TOP NAVBAR -->
+
+    <div
+        class="top-navbar animated-box-frame"
+        style="border-radius:30px;"
+    >
+
+        <div class="user-badge">
+
+            <i class="fa-solid fa-user-circle"></i>
+
+            <span id="displayUserEmail">
+                user@gmail.com
+            </span>
+
+            <span
+                id="displayUserRole"
+                class="badge-role"
+            >
+                Student
+            </span>
+
+        </div>
+
+
+        <div class="nav-right-actions">
+
+            <button
+                class="menu-hamburger-btn"
+                onclick="toggleSideMenu()"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- SIDE MENU -->
+    <!-- ===================================================== -->
+
+    <div
+        class="side-menu-overlay"
+        id="menuOverlay"
+        onclick="toggleSideMenu()"
+    ></div>
+
+
+    <div
+        class="side-menu-drawer"
+        id="sideDrawer"
+    >
+
+        <div class="drawer-header">
+
+            <h3>
+                OL Commerce Menu
+            </h3>
+
+            <button
+                class="close-drawer-btn"
+                onclick="toggleSideMenu()"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <ul class="drawer-nav-list">
+
+            <!-- HOME -->
+
+            <li class="drawer-nav-item">
+
+                <button
+                    id="navHome"
+                    class="active"
+                    onclick="switchPageView('home')"
+                >
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </button>
+
+            </li>
+
+
+            <!-- ACCOUNT -->
+
+            <li class="drawer-nav-item">
+
+                <button
+                    id="navAccount"
+                    onclick="switchPageView('account')"
+                >
+                    <i class="fa-solid fa-user-gear"></i>
+                    Your Account
+                </button>
+
+            </li>
+
+
+            <!-- LOGOUT -->
+
+            <li
+                class="drawer-nav-item"
+                style="margin-top:20px;"
+            >
+
+                <button
+                    onclick="logout()"
+                    style="color:#ff5252;"
+                >
+                    <i
+                        class="fa-solid fa-right-from-bracket"
+                        style="color:#ff5252;"
+                    ></i>
+
+                    Logout
+
+                </button>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- HOME PAGE -->
+    <!-- ===================================================== -->
+
+    <div
+        id="viewHome"
+        class="page-view active-view"
+    >
+
+        <header>
+
+            <img
+                src="https://i.ibb.co/Ps9fcCGK/channels4-profile.jpg"
+                alt="OL Commerce With Damith"
+                class="profile-img"
+            >
+
+            <h1>
+                Welcome to
+                <span>
+                    OL COMMERCE WITH DAMITH
+                </span>
+            </h1>
+
+            <p style="color:#aaa;">
+                Wins Institute – Veyangoda
+            </p>
+
+        </header>
+
+
+
+        <!-- MAIN TABS -->
+
+        <div class="main-tabs-container">
+
+            <button
+                class="main-tab-btn active animated-box-frame"
+                style="border-radius:25px;"
+                id="tabAllVideosBtn"
+                onclick="switchMainView('videos')"
+            >
+
+                <i class="fa-solid fa-play"></i>
+
+                All Videos
+
+            </button>
+
+
+            <button
+                class="main-tab-btn animated-box-frame"
+                style="border-radius:25px;"
+                id="tabPlaylistsBtn"
+                onclick="switchMainView('playlists')"
+            >
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                All Playlists
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="sub-tabs-container"
+            id="playlistSubTabs"
+        ></div>
+
+
+        <div
+            class="content-container"
+            id="mainContent"
+        ></div>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- ACCOUNT PAGE -->
+    <!-- ===================================================== -->
+
+    <div
+        id="viewAccount"
+        class="page-view"
+    >
+
+        <div
+            class="earn-container animated-box-frame"
+            style="text-align:center;"
+        >
+
+            <i
+                class="fa-solid fa-user-astronaut"
+                style="
+                    font-size:60px;
+                    color:#ff0000;
+                    margin-bottom:15px;
+                "
+            ></i>
+
+
+            <h2>
+                Your Account Details
+            </h2>
+
+
+            <div
+                style="
+                    background:#222;
+                    padding:20px;
+                    border-radius:10px;
+                    margin-top:20px;
+                    text-align:left;
+                "
+            >
+
+                <p style="margin-bottom:10px;">
+
+                    <strong>
+                        Logged Email:
+                    </strong>
+
+                    <span id="accEmail">
+                        user@gmail.com
+                    </span>
+
+                </p>
+
+
+                <p style="margin-bottom:10px;">
+
+                    <strong>
+                        Account Status:
+                    </strong>
+
+                    <span style="color:#38ef7d;">
+                        Active
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- ADMIN FLOATING BUTTON -->
+    <!-- ===================================================== -->
+
+    <div
+        class="fab-container"
+        id="fabContainer"
+    >
+
+        <button
+            class="fab-main"
+            onclick="toggleFab()"
+        >
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+
+        <div class="fab-options">
+
+            <button
+                class="fab-option-btn animated-box-frame"
+                onclick="openPlaylistModal()"
+            >
+
+                <i class="fa-solid fa-folder-plus"></i>
+
+                + Add Playlist
+
+            </button>
+
+
+            <button
+                class="fab-option-btn animated-box-frame"
+                onclick="openVideoModal()"
+            >
+
+                <i class="fa-solid fa-video"></i>
+
+                + Add Video
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- ADMIN - PLAYLIST MODAL -->
+<!-- ========================================================= -->
+
+<div
+    class="modal"
+    id="playlistModal"
+>
+
+    <div class="modal-content animated-box-frame">
+
+        <h3>
+            නව Playlist එකක් සාදන්න
+        </h3>
+
+
+        <input
+            type="text"
+            id="playlistNameInput"
+            placeholder="Playlist Name"
+        >
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="btn-cancel"
+                onclick="closeAdminModals()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                class="btn-submit"
+                onclick="addPlaylist()"
+            >
+                Create Playlist
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- ADMIN - VIDEO MODAL -->
+<!-- ========================================================= -->
+
+<div
+    class="modal"
+    id="videoModal"
+>
+
+    <div class="modal-content animated-box-frame">
+
+        <h3>
+            නව Video එකක් එකතු කරන්න
+        </h3>
+
+
+        <select id="playlistSelect">
+
+            <option value="none">
+                -- None (Single Video) --
+            </option>
+
+        </select>
+
+
+        <input
+            type="text"
+            id="ytLinkInput"
+            placeholder="YouTube Link"
+        >
+
+
+        <input
+            type="text"
+            id="customTitle"
+            placeholder="Title (Optional)"
+        >
+
+
+        <textarea
+            id="customDesc"
+            placeholder="Description (Optional)"
+            style="
+                height:70px;
+                resize:none;
+            "
+        ></textarea>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="btn-cancel"
+                onclick="closeAdminModals()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                class="btn-submit"
+                onclick="addVideo()"
+            >
+                Add Video
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script src="index.js" type="module"></script>
+
+</body>
+</html>
